@@ -1,0 +1,82 @@
+# Config definition
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# 1.Data General Setting. Can be replaced in respective sets
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+DATA:
+ DATALOADER:
+  NUM_WORKERS: 0
+  SAMPLER: 'random'
+  BATCH_SIZE: 1
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# 2.Model General Setting. Can be replaced in respective sets Structure Information
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+MODEL:
+ DEVICE: "cuda"
+ DEVICE_ID: (0,)
+ BACKBONE_NAME: "rna-fm"
+ PAIRWISE_PREDICTOR_NAME: "pc-resnet_1_sym_first:r-ss"
+ PRETRAINED: 0
+ THRESHOLD: 0.33993712
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# 3.LOSS General Setting. Can be replaced in respective sets Structure Information
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+#LOSS:
+# TYPE: 'bce-logit-masked-loss:r-ss*1'
+# WEIGHT_MODE: "fixed"
+#
+#METRIC:
+# TYPE: 'elewise-classification-report_triu1:r-ss'  # top-precision:r-ss
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# 4.Solver
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+SOLVER:
+ MAX_EPOCHS: 50
+ EVAL_PERIOD: 1
+ CHECKPOINT_PERIOD: 500
+ LOG_PERIOD: 4000 #500
+
+ # OPTIMIZER
+ OPTIMIZER:
+  NAME: "AdamW"
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.
+  ACCUMULATION_STEP: 1
+
+ # SCHEDULER
+ SCHEDULER:
+  NAME: "WarmupCosineLR"
+  STEP_UNIT: "epoch"
+  STEP_FREQUENCY: "iteration"
+  BASE_LR: 0.0001
+  BIAS_LR_FACTOR: 1
+  START_FROM_SCRATCH: 1
+  # WARM UP
+  WARMUP_METHOD: "linear"
+  WARMUP_FACTOR: 0.01 #0.33
+  WARMUP_STEPS: 5.0
+  # SPECIFIC
+  GAMMA: 0.1
+  MILESTONES: [10, 15, 20]
+  MAIN_STEPS: 50
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Eval Configuration
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+EVAL:
+ WEIGHT_PATH: "pretrained/Models/SS/RNA-FM-ResNet_PDB-All.pth"
+ DATALOADER:
+  BATCH_SIZE: -1
