@@ -225,4 +225,4 @@ can be linked to the first columns of:
 
 to find detailed information including sequences.
 
-The Secondary Structure are stored in *.zip from https://drive.google.com/drive/folders/1wGtaREfE-GxUDwn_attYob1DShZASQCO?usp=drive_link
+The Secondary Structure are stored in *.zip from [link](https://drive.google.com/drive/folders/1wGtaREfE-GxUDwn_attYob1DShZASQCO?usp=drive_link)
