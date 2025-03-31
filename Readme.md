@@ -32,7 +32,7 @@ IRES-LM combines two fine-tuned language models: IRES-UTRLM (based on untranslat
 #### Command
 ```bash
 cd ./Script
-CUDA_VISIBLE_DEVICES=0 python3 -m torch.distributed.launch --nproc_per_node=1 --master_port 8888 IRES_RNAFM.py --device_ids 0 --bos_emb --truncate --finetune_esm --prefix IRES_RNAFM
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 --master_port 8890 IRES_RNAFM.py --device_ids 0 --bos_emb --truncate --finetune_esm --prefix IRES_RNAFM
 ```
 
 #### Parameters
@@ -56,7 +56,7 @@ please find in [link](https://drive.google.com/drive/folders/13U1VLNbTH75nqp_ieR
 #### Command
 ```bash
 cd ./Script
-CUDA_VISIBLE_DEVICES=0 python3 -m torch.distributed.launch --nproc_per_node=1 --master_port 8888 IRES_UTRLM.py --device_ids 0 --bos_emb --finetune_esm --prefix IRES_UTRLM
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 --master_port 8889 IRES_UTRLM.py --device_ids 0 --bos_emb --finetune_esm --prefix IRES_UTRLM
 ```
 
 #### Parameters
