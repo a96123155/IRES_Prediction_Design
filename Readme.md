@@ -23,6 +23,16 @@ This framework consists of three main components:
 - `./Data/v2_dataset_with_unified_stratified_shuffle_train_test_split.csv`: Contains 9,072 IRES and 37,602 non-IRES sequences
 - `./Data/circires_case.fa`: 21 experimentally validated circRNA IRESs collected from DeepCIP
 
+## Installation
+
+Typical install time on a "normal" desktop computer < 1 hour
+```bash
+git clone https://github.com/a96123155/IRES_Prediction_Design.git
+cd IRES_Prediction_Design
+conda create -n ires python==3.9 # or 3.12
+pip install requirements.txt
+```
+
 ## 1. IRES Language Model (IRES-LM)
 
 IRES-LM combines two fine-tuned language models: IRES-UTRLM (based on untranslated regions) and IRES-RNAFM (based on non-coding RNA sequences).
@@ -75,6 +85,10 @@ please find in [link](https://drive.google.com/drive/folders/13U1VLNbTH75nqp_ieR
 
 - `./Results/IRESLM_experimentally_validated_circRNA_IRES_n21.csv`: Performance comparison in predicting 21 experimentally validated circRNA IRESs. IRES-LM, which averages predictions from IRES-UTRLM and IRES-RNAFM, identified all 21 IRESs. In this file, "U" represents IRES-UTRLM, "R" represents IRES-RNAFM.
 - `./IRESLM_UMAP_Representation_MFE`: UMAP visualization of IRES-LM representations colored by minimum free energy (MFE) values.
+
+### 1.4 Running Time
+
+Training was conducted on NVIDIA Tesla GPUs with 32GB memory per GPU, with IRES-UTRLM requiring approximately 355 seconds per epoch across 4 GPUs, while IRES-RNAFM required approximately 828 seconds per epoch. 
 
 ## 2. IRES Evolutionary Algorithm (IRES-EA)
 
@@ -226,3 +240,6 @@ can be linked to the first columns of:
 to find detailed information including sequences.
 
 The Secondary Structure are stored in *.zip from [link](https://drive.google.com/drive/folders/1wGtaREfE-GxUDwn_attYob1DShZASQCO?usp=drive_link)
+
+### 3.4 Running Time
+For implementation, we trained both strategies for 150 epochs on a single NVIDIA Tesla GPU with 32GB memory. The reward-guided approach, which leveraged the IRES-UTRLM classifier for reward calculation, required approximately 352 seconds per epoch, while the direct training approach needed only 225 seconds per epoch. Both strategies initially generated 9,172 sequences to match the scale of our training dataset.
