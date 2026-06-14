@@ -52,8 +52,8 @@ from Bio import SeqIO
 import warnings
 warnings.filterwarnings('ignore')
 
-import vMay7_UTRLM_Predictor as utrlm
-import vMay7_RNAFM_Predictor as rnafm
+import UTRLM_Predictor as utrlm
+import RNAFM_Predictor as rnafm
 from collections import OrderedDict
 # Set up any necessary specific library configurations
 matplotlib.use('Agg')  # For matplotlib to work in headless mode
